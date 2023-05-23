@@ -16,7 +16,7 @@ export default class Box extends Component {
       
               }>Box</div>
             <div>
-                <button style={{margin:'0.5rem'}}>X</button>
+                <button onClick={this.props.removeBox} style={{margin:'0.12rem'}}>X</button>
             </div>
         </div>
         

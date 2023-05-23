@@ -8,23 +8,15 @@ export default class ListingBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boxes: [
-        {
-          width: '20',
-          height: '20',
-          color: 'blue',
-          border: '1',
-          borderRadius: '2',
-        },
-        {
-          width: '20',
-          height: '20',
-          color: 'pink',
-          border: '1',
-          borderRadius: '2',
-        },
-      ],
+      boxes: [ ],
     };
+    this.create = this.create.bind(this);
+    this.remove = this.remove.bind(this);
+  }
+  remove(id) {
+    this.setState({
+      boxes: this.state.boxes.filter(box => box.id !== id)
+    });
   }
 
   create = (newBox) => {
@@ -34,20 +26,23 @@ export default class ListingBox extends Component {
   };
 
   render() {
-    const boxes = this.state.boxes.map((box, index) => (
+    const boxes = this.state.boxes.map((box) => (
       <Box
-        key={index}
+        key={box.id}
+        id={box.id}
         width={box.width}
         height={box.height}
         color={box.color}
         border={box.border}
         borderRadius={box.borderRadius}
+        removeBox={()=> this.remove(box.id)}
       />
     ));
 
     return (
         <div>
-         <FormList create={this.create} />
+        <FormList create={this.create}
+          remove={this.remove } />
         {boxes}
         
       </div>

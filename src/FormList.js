@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-
+import { v4 as uuidv4 } from 'uuid';
 
 export default class FormList
     extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            width: '',
-            height: '',
-            color: ''
+            width: '', // Set initial value to an empty string or default value if applicable
+            height: '', // Set initial value to an empty string or default value if applicable
+            color: '', // Set initial value to an empty string or default value if applicable
+            border: '', // Set initial value to an empty string or default value if applicable
+            borderRadius: '',
+      
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -21,8 +24,9 @@ export default class FormList
     });
     }
     handleSubmit(evt) {
-        evt.preventDefault();
-        this.props.create(this.state);
+      evt.preventDefault();
+      const newBox = {...this.state, id: uuidv4()}
+        this.props.create(newBox);
         this.setState({
             width: '',
             height: '',
